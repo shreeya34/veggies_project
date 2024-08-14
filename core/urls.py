@@ -5,5 +5,8 @@ from core.views import index
 
 app_name = "urls"
 urlpatterns = [
-    path("", views.index),
+    path("", views.index, name='index'),
+    path('contact/', views.contact, name='contact'),
+    path('shop/',views.shop, name="shop"),
+    path('shop_details/',views.shop_details, name="shop_details"),
 ]
