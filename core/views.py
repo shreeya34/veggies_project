@@ -13,3 +13,9 @@ def shop(request):
 
 def shop_details(request):
     return render(request,"core/shop-detail.html")
+
+def cart(request):
+    return render(request,"core/cart.html")
+
+def checkout(request):
+    return render(request,"core/chackout.html")
