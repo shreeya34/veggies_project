@@ -24,6 +24,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls', namespace='core')),  # Ensure the namespace is specified here
+    path('user/', include('userauths.urls')),  # Ensure the namespace is specified here
+
 ]
 
 if settings.DEBUG:
