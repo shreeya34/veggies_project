@@ -1,9 +1,11 @@
 from django.shortcuts import redirect, render
 from userauths.forms import UserRegisterForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login as auth_login, authenticate,logout
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse
+from django.conf import settings
+
+from userauths.models import User
 
 def facebook_login(request):
     # Your Facebook login logic here
@@ -37,14 +39,34 @@ def register_view(request):
     }
     return render(request,"userauths/sign-up.html",context)
 
-
 def login_view(request):
+    if request.user.is_authenticated:
+        messages.warning(request, "Hey, you are already logged in")
+        return redirect("core:index")
+
     if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            # Redirect to a success page
-    else:
-        form = AuthenticationForm()
-    return render(request, 'userauths/login.html', {'form': form})
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            messages.warning(request, f"User with {email} does not exist")
+            return render(request, "userauths/sign-in.html")
+
+        user = authenticate(request, username=user.username, password=password)
+
+        if user is not None:
+            auth_login(request, user)
+            messages.success(request, "You are logged in")
+            return redirect("core:index")
+        else:
+            messages.warning(request, "Invalid credentials, please try again")
+            
+    return render(request, "userauths/sign-in.html")
+            
+def logout_view(request):
+        logout(request)
+        messages.success(request,"You logged out")
+        return redirect("userauths:sign-in")
+   

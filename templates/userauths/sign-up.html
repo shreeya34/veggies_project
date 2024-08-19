@@ -1,42 +1,12 @@
 {% extends 'partials/base.html' %}
-
+{% load static %}
 {% block content %}
-    <div class="container center-box">
-        <div class="box">
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="box" style="width: 400px; padding: 20px; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
             <h2 class="text-center">Register</h2>
-            <form method="post">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="id_username">Username:</label>
-                    {{ form.username }}
-                </div>
-                <div class="form-group">
-                    <label for="id_email">Email:</label>
-                    {{ form.email }}
-                </div>
-                <div class="form-group">
-                    <label for="id_password1">Password:</label>
-                    {{ form.password1 }}
-                </div>
-                <div class="form-group">
-                    <label for="id_password2">Confirm Password:</label>
-                    {{ form.password2 }}
-                </div>
-                <div class="form-group">
-                    <label for="id_role">I am a:</label>
-                    {{ form.role }}
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Register</button>
-            </form>
-            {% if messages %}
-            <div class="alert alert-success mt-3" role="alert">
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}
-            </div>
-            {% endif %}
             {% if form.errors %}
-            <div class="alert alert-danger mt-3" role="alert">
+            <div class="alert alert-danger">
+                <strong>Please correct the errors below.</strong>
                 <ul>
                     {% for field in form %}
                         {% for error in field.errors %}
@@ -46,16 +16,54 @@
                 </ul>
             </div>
             {% endif %}
-            <div class="text-center mt-3">
-                <p>Or register with:</p>
-                <a href="{% url 'userauths:facebook_login' %}" class="btn btn-primary btn-block">
-                    <i class="fab fa-facebook-f"></i> Continue with Facebook
-                </a>
-                <a href="{% url 'userauths:google_login' %}" class="btn btn-danger btn-block">
-                    <i class="fab fa-google"></i> Continue with Google
-                </a>
-            </div>
-            <p class="text-center mt-3">Already have an account? <a href="{% url 'userauths:login' %}">Login here</a></p>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="id_username">Username:</label>
+                    <input type="text" id="id_username" name="username" class="form-control" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="id_email">Email:</label>
+                    <input type="email" id="id_email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="id_password1">Password:</label>
+                    <input type="password" id="id_password1" name="password1" class="form-control" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="id_password2">Confirm Password:</label>
+                    <input type="password" id="id_password2" name="password2" class="form-control" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="id_role">I am a:</label>
+                    <select id="id_role" name="role" class="form-control">
+                        <option value="vendor">I am a vendor</option>
+                        <option value="customer">I am a customer</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <input type="checkbox" id="id_terms" name="terms" required>
+                    <label for="id_terms">I agree to the terms and conditions</a></label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" style="margin-top: 15px;">Register</button>
+                {% if messages %}
+                <div class="alert alert-success mt-3" role="alert">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <div class="text-center mt-3">
+                    <p>Or register with:</p>
+                    <a href="{% url 'userauths:facebook_login' %}" class="btn btn-primary btn-block" style="margin-top: 15px;">
+                        <i class="fab fa-facebook-f"></i> Continue with Facebook
+                    </a>
+                    <a href="{% url 'userauths:google_login' %}" class="btn btn-danger btn-block" style="margin-top: 15px;">
+                        <i class="fab fa-google"></i> Continue with Google
+                    </a>
+                </div>
+                <p class="text-center mt-3">Already have an account? <a href="{% url 'userauths:sign-in' %}">Login here</a></p>
+            </form>
         </div>
     </div>
 {% endblock %}

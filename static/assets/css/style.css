@@ -499,16 +499,17 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
 
 .center-box {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 100vh; /* Ensures it takes the full height of the viewport */
+    padding-top: 60px; /* Adjust based on your header height */
     position: relative;
-    z-index: 2; /* Ensures the box is above other elements */
-    padding: 20px; /* Adds some space around the box */
+    z-index: 1;
 }
 
 .box {
@@ -519,11 +520,14 @@ html, body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    position: relative;
-    z-index: 3; /* Ensures the box content is above other elements */
+    z-index: 2; /* Keeps the box above other content */
 }
 
 header {
-    z-index: 1; /* Places the header below the form */
-    position: relative;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3; /* Ensures the header stays on top */
+    background-color: #f8f9fa; /* Adjust to match your design */
 }
+
