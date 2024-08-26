@@ -1,8 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render
+from core.models import Product,ProductImages,ProductReview,CartOrder,Category,CartOrderItems,Vendor,Wishlist,Address
+
 
 def index(request):
+    bananas = Product.objects.all()
+    
+    context = {
+        "products":bananas
+        
+    }
     return  render(request,"core/index.html")
 
 def contact(request):
