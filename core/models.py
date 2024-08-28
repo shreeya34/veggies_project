@@ -75,13 +75,14 @@ class Vendor(models.Model):
         return self.title
 
 class Product(models.Model):
-    vid = ShortUUIDField(unique=True, length=10,max_length=20,prefix="cat",alphabet="sbjahdnck")
+    pid = ShortUUIDField(unique=True, length=10,max_length=20,prefix="cat",alphabet="sbjahdnck")
     title = models.CharField(max_length=100,default="Tomato")
     image = models.ImageField(upload_to=user_directory_path, default="vegetable-item-1.jpg")
     description = models.TextField(null=True, blank=True, default="This is the product")
     
     user = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     category = models.ForeignKey(Category,on_delete=models.SET_NULL,null=True)
+
     
     price = models.DecimalField(max_digits=9999999999,decimal_places=2,default=1.99)
     old_price = models.DecimalField(max_digits=9999999999,decimal_places=2,default=1.99)

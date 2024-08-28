@@ -5,13 +5,34 @@ from core.models import Product,ProductImages,ProductReview,CartOrder,Category,C
 
 
 def index(request):
-    bananas = Product.objects.all()
+    # products = Product.objects.all().order_by("-id")
+    products = Product.objects.filter(product_status="published",featured=True)
     
     context = {
-        "products":bananas
+        "products":products
         
     }
-    return  render(request,"core/index.html")
+    return  render(request,"core/index.html",context)
+
+def product_list_view(request):
+    products = Product.objects.filter(product_status="published",featured=True)
+    
+    context = {
+        "products":products
+        
+    }
+    return  render(request,"core/product-list.html",context)
+
+
+
+def category_list_view(request):
+    categories = Category.objects.all()
+    
+    context = {
+        "categories":categories
+    }
+    
+    return  render(request,"core/category-list.html",context)
 
 def contact(request):
     return render(request, "core/contact.html")
