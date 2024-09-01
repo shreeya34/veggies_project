@@ -1,0 +1,66 @@
+
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+<div class="container">
+    <!-- Page Header -->
+    <div class="category-header">
+        <h1>Product Categories</h1>
+        <p>Explore a variety of categories and find the products you're looking for.</p>
+    </div>
+
+    <div class="row">
+        <!-- Sidebar for Filters -->
+        <div class="col-md-3">
+            <div class="sidebar">
+                <h4>Filter by</h4>
+                <hr>
+                <h5>Price Range</h5>
+                <ul class="list-unstyled">
+                    <li><input type="radio" id="price1" name="price" value="under50"> <label for="price1">Under $50</label></li>
+                    <li><input type="radio" id="price2" name="price" value="50to100"> <label for="price2">$50 to $100</label></li>
+                    <li><input type="radio" id="price3" name="price" value="above100"> <label for="price3">Above $100</label></li>
+                </ul>
+                <hr>
+                <h5>Tags</h5>
+                <ul class="list-unstyled">
+                    <li><input type="checkbox" id="tag1" name="tag" value="new"> <label for="tag1">New Arrivals</label></li>
+                    <li><input type="checkbox" id="tag2" name="tag" value="sale"> <label for="tag2">On Sale</label></li>
+                    <li><input type="checkbox" id="tag3" name="tag" value="popular"> <label for="tag3">Most Popular</label></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Category List -->
+        <div class="col-md-9">
+            <div class="category-list-group">
+                <div class="category-item">
+                    <h5>Electronics</h5>
+                    <p>Find the latest gadgets and electronics here.</p>
+                    <a href="#" class="btn btn-primary">View Products</a>
+                </div>
+
+                <div class="category-item">
+                    <h5>Fashion</h5>
+                    <p>Explore trendy fashion items.</p>
+                    <a href="#" class="btn btn-primary">View Products</a>
+                </div>
+
+                <div class="category-item">
+                    <h5>Home & Kitchen</h5>
+                    <p>Upgrade your home with the latest products.</p>
+                    <a href="#" class="btn btn-primary">View Products</a>
+                </div>
+
+                <!-- Add more categories as needed -->
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+{% endblock content %}
