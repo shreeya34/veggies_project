@@ -5,30 +5,11 @@
 <div class="container">
     <!-- Page Header -->
     <div class="category-header text-center">
-        <h1>Product Categories</h1>
-        <p>Explore a variety of categories and find the products you're looking for.</p>
+        <h1>{{ category.name }}</h1>
+        <p>Products in {{ category.name }}</p>
     </div>
 
     <div class="row">
-        <!-- Sidebar for Categories -->
-        <div class="col-md-3">
-            <div class="sidebar">
-                <h4>Categories</h4>
-                <hr>
-                <div class="category-list-group">
-                    {% if categories %}
-                        {% for category in categories %}
-                            <a href="{% url 'core:category-products' category_slug=category.slug %}" class="category-link" style="display: block; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 5px; text-decoration: none; color: #333;">
-                                {{ category.name }}
-                            </a>
-                        {% endfor %}
-                    {% else %}
-                        <p>No categories available.</p>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-
         <!-- Sidebar for Filters -->
         <div class="col-md-3">
             <div class="sidebar">
@@ -63,7 +44,7 @@
         </div>
 
         <!-- Product List -->
-        <div class="col-md-6">
+        <div class="col-md-9">
             <div class="product-list-group">
                 {% if products %}
                     {% for product in products %}
