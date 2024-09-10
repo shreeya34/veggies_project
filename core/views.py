@@ -29,13 +29,7 @@ from django.shortcuts import get_object_or_404, render
 from django.http import JsonResponse
 from core.models import Product, Category
 
-from django.shortcuts import get_object_or_404, render
-from django.http import JsonResponse
-from core.models import Product, Category
 
-from django.shortcuts import get_object_or_404, render
-from django.http import JsonResponse
-from core.models import Product, Category
 
 def category_list_view(request):
     categories = Category.objects.all()
@@ -63,10 +57,9 @@ def category_products(request, category_slug):
 
     if tag_filter:
         if 'new' in tag_filter:
-            # Example: Assume you have a field in Product for tags or similar
-            products = products.filter(is_new=True) 
+            products = products.filter(is_new=True)
         if 'sale' in tag_filter:
-            products = products.filter(on_sale=True) 
+            products = products.filter(on_sale=True)
         if 'popular' in tag_filter:
             products = products.filter(is_popular=True)
 
