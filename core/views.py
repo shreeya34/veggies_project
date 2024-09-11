@@ -33,41 +33,12 @@ from core.models import Product, Category
 
 def category_list_view(request):
     categories = Category.objects.all()
-    print("Categories:", categories)  # Debugging line
+   
     context = {"categories": categories}
     return render(request, "core/category-list.html", context)
 
 
-def category_products(request, category_slug):
-    category = get_object_or_404(Category, slug=category_slug)
-    
-    # Handle filtering by price range and tags
-    price_filter = request.GET.get('price')
-    tag_filter = request.GET.getlist('tag')
 
-    products = Product.objects.filter(category=category)
-
-    if price_filter:
-        if price_filter == 'under50':
-            products = products.filter(price__lt=50)
-        elif price_filter == '50to100':
-            products = products.filter(price__gte=50, price__lte=100)
-        elif price_filter == 'above100':
-            products = products.filter(price__gt=100)
-
-    if tag_filter:
-        if 'new' in tag_filter:
-            products = products.filter(is_new=True)
-        if 'sale' in tag_filter:
-            products = products.filter(on_sale=True)
-        if 'popular' in tag_filter:
-            products = products.filter(is_popular=True)
-
-    context = {
-        'category': category,
-        'products': products
-    }
-    return render(request, 'core/category-products.html', context)
 
 
 def contact(request):

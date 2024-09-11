@@ -2,84 +2,35 @@
 {% load static %}
 {% block content %}
 
-<div class="container">
-    <!-- Page Header -->
-    <div class="category-header text-center">
-        <h1>Product Categories</h1>
-        <p>Explore a variety of categories and find the products you're looking for.</p>
-    </div>
+<div class="container" style="margin-top: 200px;">
+    <!-- Filters Section -->
+    <div class="row mb-5">
 
+    <!-- Main Product List -->
     <div class="row">
-        <!-- Sidebar for Categories -->
-        <div class="col-md-3">
-            <div class="sidebar">
-                <h4>Categories</h4>
-                <hr>
-                <div class="category-list-group">
-                    {% if categories %}
-                        {% for category in categories %}
-                            <a href="{% url 'core:category-products' category_slug=category.slug %}" class="category-link" style="display: block; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 5px; text-decoration: none; color: #333;">
-                                {{ category.name }}
-                            </a>
-                        {% endfor %}
-                    {% else %}
-                        <p>No categories available.</p>
-                    {% endif %}
+        {% if categories %}
+            {% for c in categories %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="{{ c.image.url }}" class="card-img-top" alt="{{ c.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">{{ c.title }}</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt.</p>
+                        <div class="product-price mb-2">
+                            {% if c.price %}
+                                <span class="font-weight-bold">${{ c.price }}</span>
+                            {% endif %}
+                        </div>
+                        <!-- <a href="#" class="btn btn-primary"><i class="fa fa-shopping-bag me-2"></i> Add to cart</a> -->
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Sidebar for Filters -->
-        <div class="col-md-3">
-            <div class="sidebar">
-                <h4>Filter by</h4>
-                <hr>
-                <h5>Price Range</h5>
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="?price=under50">Under $50</a>
-                    </li>
-                    <li>
-                        <a href="?price=50to100">$50 to $100</a>
-                    </li>
-                    <li>
-                        <a href="?price=above100">Above $100</a>
-                    </li>
-                </ul>
-                <hr>
-                <h5>Tags</h5>
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="?tag=new">New Arrivals</a>
-                    </li>
-                    <li>
-                        <a href="?tag=sale">On Sale</a>
-                    </li>
-                    <li>
-                        <a href="?tag=popular">Most Popular</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Product List -->
-        <div class="col-md-6">
-            <div class="product-list-group">
-                {% if products %}
-                    {% for product in products %}
-                        <div class="product-item-box" style="border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; background-color: #fff; border-radius: 5px;">
-                            <h5>{{ product.name }}</h5>
-                            <p>{{ product.description }}</p>
-                            <p>Price: ${{ product.price }}</p>
-                            <!-- Add more product details as needed -->
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <p>No products available in this category.</p>
-                {% endif %}
-            </div>
-        </div>
+            {% endfor %}
+        {% else %}
+            <p>No categories available.</p>
+        {% endif %}
     </div>
+
 </div>
 
 {% endblock content %}

@@ -81,7 +81,7 @@ class Product(models.Model):
     description = models.TextField(null=True, blank=True, default="This is the product")
     
     user = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
-    category = models.ForeignKey(Category,on_delete=models.SET_NULL,null=True)
+    category = models.ForeignKey(Category,on_delete=models.SET_NULL,null=True,related_name="category")
 
     
     price = models.DecimalField(max_digits=9999999999,decimal_places=2,default=1.99)
